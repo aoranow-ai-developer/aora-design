@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/chart'
 import { CONTEXTS, PROJECTS, countByStatus, type ContextStatus } from '@/lib/mock'
 
-// Donut da distribuição de status (🟢🟡🔴⚪ do AGP). Cores = tokens de estado,
+// Donut da distribuição de status (🟢🟡🔴⚪). Cores = tokens de estado,
 // então troca de tema junto. PieChart de tamanho FIXO (sem ResponsiveContainer:
 // ele media largura errada em troca de view e clipava o pie).
 const STATUS_TOKEN: Record<ContextStatus, { label: string; color: string }> = {

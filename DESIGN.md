@@ -4,8 +4,7 @@
 >
 > | | |
 > |---|---|
-> | `spec_source` | `Obsidian Vault/Projetos/Design System AoraNow/Specs/DESIGN.md mestre (AoraNow).md` |
-> | `vault_commit` | `2560dc0` |
+> | `spec_source` | vault interno do AoraNow (DESIGN.md mestre do design system) |
 > | `exported` | 2026-06-23 |
 > | autoria | **o vault é a fonte de autoria**; este arquivo é o guia do design system (cópia viva). Mudança de identidade/token nasce no vault e re-exporta. |
 >

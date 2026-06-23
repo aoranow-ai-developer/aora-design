@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/command'
 import { CONTEXTS, PROJECTS } from '@/lib/mock'
 
-// ⌘K — busca global de projeto/contexto (liga em search_contexts/resolve_project no AGP real).
+// ⌘K — busca global de projeto/contexto (liga em busca/resolução de projeto).
 export function CommandMenu({
   open,
   onOpenChange,
@@ -39,7 +39,7 @@ export function CommandMenu({
   }
 
   return (
-    <CommandDialog open={open} onOpenChange={onOpenChange} title="Busca no AGP" description="Projetos e contextos">
+    <CommandDialog open={open} onOpenChange={onOpenChange} title="Busca" description="Projetos e contextos">
       <Command>
         <CommandInput placeholder="Buscar projeto, contexto, issue…" />
         <CommandList>

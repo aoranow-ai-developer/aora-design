@@ -77,9 +77,9 @@ export function KitchenSink() {
           <Select>
             <SelectTrigger><SelectValue placeholder="Projeto…" /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="agp">AGP</SelectItem>
-              <SelectItem value="pmo">24h PMO Agent</SelectItem>
-              <SelectItem value="skillops">SkillOps</SelectItem>
+              <SelectItem value="atlas">Atlas</SelectItem>
+              <SelectItem value="orbit">Orbit</SelectItem>
+              <SelectItem value="beacon">Beacon</SelectItem>
             </SelectContent>
           </Select>
           <Textarea placeholder="Descrição / nota…" rows={2} />

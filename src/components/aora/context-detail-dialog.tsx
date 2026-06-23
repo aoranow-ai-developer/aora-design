@@ -9,16 +9,16 @@ import {
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { StatusBadge } from './status-badge'
-import type { AgpContext } from '@/lib/mock'
+import type { ContextItem } from '@/lib/mock'
 
 export function ContextDetailDialog({
   ctx,
   onOpenChange,
   onAction,
 }: {
-  ctx: AgpContext | null
+  ctx: ContextItem | null
   onOpenChange: (o: boolean) => void
-  onAction: (ctx: AgpContext, action: 'aprovar' | 'descartar') => void
+  onAction: (ctx: ContextItem, action: 'aprovar' | 'descartar') => void
 }) {
   return (
     <Dialog open={!!ctx} onOpenChange={onOpenChange}>

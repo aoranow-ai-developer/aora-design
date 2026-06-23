@@ -1,9 +1,9 @@
 import { AlertTriangle, RotateCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-// ErrorState (aora): falha ao buscar do AGP Gateway. role=alert + retry.
+// ErrorState (aora): falha ao buscar dados. role=alert + retry.
 export function ErrorState({
-  message = 'Falha ao consultar o AGP Gateway.',
+  message = 'Falha ao consultar o servidor.',
   onRetry,
 }: {
   message?: string

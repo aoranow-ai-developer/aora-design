@@ -89,7 +89,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   TEMA ESCURO (default do dashboard AGP) — .dark
+   TEMA ESCURO (default do dashboard) — .dark
    Remapeia só o que muda; constantes/scale/runtime herdam do :root.
    ───────────────────────────────────────────────────────────── */
 .dark {

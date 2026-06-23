@@ -1,6 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import { MoreHorizontal, CheckCircle2, Clock, XCircle, AlertTriangle } from 'lucide-react'
-import type { AgpContext } from '@/lib/mock'
+import type { ContextItem } from '@/lib/mock'
 import { DataTable, SortHead } from './data-table'
 import { StatusBadge } from './status-badge'
 import { Button } from '@/components/ui/button'
@@ -17,19 +17,19 @@ import {
 
 export type ContextAction = 'aprovar' | 'revisao' | 'descartar' | 'stale'
 
-// Uso de showcase: as colunas do AGP sobre o DataTable genérico do design system.
+// Uso de showcase: as colunas do showcase sobre o DataTable genérico do design system.
 export function ContextsTable({
   data,
   onRowClick,
   onAction,
   onBulkApprove,
 }: {
-  data: AgpContext[]
-  onRowClick: (ctx: AgpContext) => void
-  onAction: (ctx: AgpContext, action: ContextAction) => void
-  onBulkApprove: (rows: AgpContext[]) => void
+  data: ContextItem[]
+  onRowClick: (ctx: ContextItem) => void
+  onAction: (ctx: ContextItem, action: ContextAction) => void
+  onBulkApprove: (rows: ContextItem[]) => void
 }) {
-  const columns: ColumnDef<AgpContext>[] = [
+  const columns: ColumnDef<ContextItem>[] = [
     {
       id: 'select',
       header: ({ table }) => (
@@ -135,7 +135,7 @@ export function ContextsTable({
           size="sm"
           className="rounded-pill hover:bg-accent"
           onClick={() => {
-            onBulkApprove(rows as AgpContext[])
+            onBulkApprove(rows as ContextItem[])
             clear()
           }}
         >

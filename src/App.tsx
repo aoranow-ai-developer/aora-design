@@ -13,7 +13,7 @@ import { CommandMenu } from '@/components/aora/command-menu'
 import { KitchenSink } from '@/components/aora/kitchen-sink'
 import { EmptyState } from '@/components/aora/empty-state'
 import { ErrorState } from '@/components/aora/error-state'
-import { CONTEXTS, countByStatus, type AgpContext } from '@/lib/mock'
+import { CONTEXTS, countByStatus, type ContextItem } from '@/lib/mock'
 
 type View = 'overview' | 'contexts' | 'states' | 'kitchen'
 
@@ -51,7 +51,7 @@ function App() {
   const [dark, setDark] = useState(false) // claro = default
   const [view, setView] = useState<View>('overview')
   const [cmdOpen, setCmdOpen] = useState(false)
-  const [detail, setDetail] = useState<AgpContext | null>(null)
+  const [detail, setDetail] = useState<ContextItem | null>(null)
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark)
@@ -61,7 +61,7 @@ function App() {
   const total = CONTEXTS.length
   const approvalRate = Math.round((counts.aprovado / total) * 100)
 
-  const onAction = (ctx: AgpContext, action: ContextAction) => {
+  const onAction = (ctx: ContextItem, action: ContextAction) => {
     setDetail(null)
     const msg = `${ctx.id} ${ACTION_LABEL[action]}`
     if (action === 'descartar') toast.error(msg, { description: ctx.title })
@@ -76,7 +76,7 @@ function App() {
       onNavigate={(id) => setView(id as View)}
       title={TITLES[view]}
       userInitials="LS"
-      footer="// AGP Console · mock"
+      footer="// Console · demo"
       dark={dark}
       setDark={setDark}
       onOpenCommand={() => setCmdOpen(true)}
@@ -136,7 +136,7 @@ function App() {
             />
           </Card>
           <Card className="p-0 overflow-hidden">
-            <ErrorState onRetry={() => toast.success('Reconectado ao AGP Gateway')} />
+            <ErrorState onRetry={() => toast.success('Reconectado ao gateway')} />
           </Card>
         </div>
       )}
