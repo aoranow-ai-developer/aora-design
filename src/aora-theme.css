@@ -1,0 +1,260 @@
+/* class-based dark mode: faz os utilitários `dark:` dos componentes shadcn
+   seguirem a classe .dark (em vez de prefers-color-scheme). Nosso swap de
+   tema principal já vem das CSS vars redefinidas em .dark. */
+@custom-variant dark (&:is(.dark *));
+
+/* ─────────────────────────────────────────────────────────────
+   TEMA CLARO (default de vitrine/docs) — :root
+   Cores temáveis + obrigatórias do shadcn + extras, e as vars de
+   runtime que NÃO são namespaces do Tailwind (z-index/motion/opacity).
+   ÚNICO lugar (junto com .dark) onde HEX de cor pode aparecer.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  /* — Marca (constantes; não mudam entre temas) — */
+  --brand-navy:        #092F49;
+  --brand-navy-ink:    #23323C;
+  --brand-navy-muted:  #6D8595; /* só UI/ícone/borda — NÃO texto de corpo (3.4:1) */
+  --brand-teal:        #1C645F;
+  --brand-teal-bright: #39C5BB; /* "Miku" */
+  --brand-green:       #528E62;
+  --brand-gradient: linear-gradient(219deg, #123A56 9%, #1C645F 68%, #528E62 100%);
+
+  /* — Superfícies / base — */
+  --background:  #EEF2F6;
+  --foreground:  #23323C;
+  --surface:     #FBFCFD;   /* extra (= --card / --popover) */
+  --surface-alt: #E4EAEF;   /* extra (= --secondary / --muted) */
+
+  /* — shadcn: card / popover / secondary — */
+  --card:                 var(--surface);
+  --card-foreground:      var(--foreground);
+  --popover:              var(--surface);
+  --popover-foreground:   var(--foreground);
+  --secondary:            var(--surface-alt);
+  --secondary-foreground: var(--foreground);
+
+  /* — COLISÃO muted (resolvida) —
+     Nosso "muted" é TEXTO secundário; o shadcn --muted é FUNDO e
+     --muted-foreground é o TEXTO. Logo: --muted := surface-alt (fundo);
+     --muted-foreground := nosso texto secundário (escurecido p/ passar AA);
+     nosso "muted" de texto fica explícito em --text-muted. */
+  --muted:             var(--surface-alt);   /* FUNDO (shadcn) */
+  --muted-foreground:  #54697A;              /* TEXTO secundário — 5.07:1 bg / 4.71:1 surface-alt (AA) */
+  --text-muted:        #54697A;              /* alias do nosso "muted" de texto, já AA */
+  --text-muted-strong: #5A7080;              /* texto pequeno/caption — 4.59:1 bg (AA) */
+
+  /* — Primária / acento — */
+  --primary:            #092F49;
+  --primary-foreground: #FFFFFF;
+  --accent:             #1C645F;
+  --accent-foreground:  #FFFFFF;
+
+  /* — Bordas / input / ring — */
+  --border:        #DCE3E8;
+  --border-strong: #C7D2DA;              /* extra */
+  --input:         var(--border-strong); /* shadcn --input = borda do input */
+  --ring:          #1C645F;
+
+  /* — Status (success/warning são extras; danger→destructive) — */
+  --success:                #1C645F;
+  --success-foreground:     #FFFFFF;
+  --warning:                #92610A;
+  --warning-foreground:     #FFFFFF;
+  --destructive:            #B42318; /* nosso "danger" */
+  --destructive-foreground: #FFFFFF;
+  --danger:                 var(--destructive);            /* alias do nosso nome */
+  --danger-foreground:      var(--destructive-foreground);
+
+  /* — Charts (tema claro) — */
+  --chart-1: #1C645F;
+  --chart-2: #092F49;
+  --chart-3: #528E62;
+  --chart-4: #6D8595;
+  --chart-5: #92610A;
+
+  /* — Runtime-only (não viram utilitário; usar via var()/arbitrário) — */
+  --z-dropdown: 1000;
+  --z-sticky:   1100;
+  --z-popover:  1200;
+  --z-modal:    1300;
+  --z-toast:    1400;
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+  --opacity-disabled: 0.45;
+  --opacity-muted:    0.65;
+  --focus-ring-width:  2px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color:  var(--ring);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TEMA ESCURO (default do dashboard AGP) — .dark
+   Remapeia só o que muda; constantes/scale/runtime herdam do :root.
+   ───────────────────────────────────────────────────────────── */
+.dark {
+  --background:  #0C1A24;
+  --foreground:  #E6EBEE;
+  --surface:     #11242F;
+  --surface-alt: #16303D;
+
+  --card:                 var(--surface);
+  --card-foreground:      var(--foreground);
+  --popover:              var(--surface);
+  --popover-foreground:   var(--foreground);
+  --secondary:            var(--surface-alt);
+  --secondary-foreground: var(--foreground);
+
+  --muted:             var(--surface-alt);   /* FUNDO */
+  --muted-foreground:  #9DB0BC;              /* TEXTO secundário — 7.88:1 (AA) */
+  --text-muted:        #9DB0BC;
+  --text-muted-strong: #9DB0BC;              /* dark não distingue; cai no muted */
+
+  --primary:            #39C5BB;
+  --primary-foreground: #0C1A24;
+  --accent:             #39C5BB;
+  --accent-foreground:  #0C1A24;
+
+  --border:        #21384A;
+  --border-strong: #2E4A5E;
+  --input:         var(--border-strong);
+  --ring:          #39C5BB;
+
+  --success:                #39C5BB;
+  --success-foreground:     #0C1A24;
+  --warning:                #E5B95C;
+  --warning-foreground:     #0C1A24;
+  --destructive:            #F06A5D;
+  --destructive-foreground: #0C1A24;
+  --danger:                 var(--destructive);
+  --danger-foreground:      var(--destructive-foreground);
+
+  /* Charts (paleta dark própria — clara o suficiente p/ ≥3:1 sobre #0C1A24) */
+  --chart-1: #39C5BB; /* teal-bright  8.31:1 */
+  --chart-2: #7FB3E0; /* azul         7.93:1 */
+  --chart-3: #6FC082; /* verde        8.02:1 */
+  --chart-4: #9DB0BC; /* slate        7.88:1 */
+  --chart-5: #E5B95C; /* âmbar        9.61:1 */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   @theme — escala de design ESTÁTICA (não muda por tema).
+   Valores LITERAIS (não auto-referenciar) → vira utilitário + var global.
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  /* Fontes → font-display / font-sans / font-mono / font-jp */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans:    "Inter", "Noto Sans", "Noto Sans JP", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+  --font-jp:      "Noto Sans JP", "Noto Sans", system-ui, sans-serif;
+
+  /* Espaçamento base-4 (Tailwind deriva p-1..p-16 daqui) */
+  --spacing: 0.25rem;
+
+  /* Raio (shadcn deriva o default daqui; componentes-chave sobrescrevem — ver §3) */
+  --radius:      0.75rem;
+  --radius-sm:   0.5rem;
+  --radius-md:   0.75rem;
+  --radius-lg:   0.75rem;  /* shadcn usa rounded-lg em dropdown/popover/input/etc — raio de COMPONENTE, não hero (era 3rem → comia texto) */
+  --radius-card: 1.5rem;
+  --radius-hero: 3rem;     /* heros/landings — uso explícito nosso, fora do shadcn (era o --radius-lg) */
+  --radius-pill: 9999px;
+  --radius-full: 50%;
+
+  /* Breakpoints → sm: md: lg: xl: */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
+  /* Elevação (navy-tinted; --shadow-focus usa var(--ring), resolve por tema) */
+  --shadow-sm:    0 1px 2px 0 rgb(9 47 73 / 0.06);
+  --shadow-md:    0 4px 12px -2px rgb(9 47 73 / 0.10);
+  --shadow-lg:    0 12px 32px -8px rgb(9 47 73 / 0.16);
+  --shadow-focus: 0 0 0 2px var(--ring);
+
+  /* Easing + tracking (literais) */
+  --ease-standard:   cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1.2);
+  --tracking-label:  0.12em;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   @theme inline — SÓ cores: mapeia utilitário → var temável.
+   "inline" faz o utilitário referenciar var(--*), então o switch
+   .dark funciona sem regenerar classes. (Nada auto-referenciado.)
+   ───────────────────────────────────────────────────────────── */
+@theme inline {
+  --color-background:             var(--background);
+  --color-foreground:             var(--foreground);
+  --color-card:                   var(--card);
+  --color-card-foreground:        var(--card-foreground);
+  --color-popover:                var(--popover);
+  --color-popover-foreground:     var(--popover-foreground);
+  --color-primary:                var(--primary);
+  --color-primary-foreground:     var(--primary-foreground);
+  --color-secondary:              var(--secondary);
+  --color-secondary-foreground:   var(--secondary-foreground);
+  --color-muted:                  var(--muted);
+  --color-muted-foreground:       var(--muted-foreground);
+  --color-accent:                 var(--accent);
+  --color-accent-foreground:      var(--accent-foreground);
+  --color-destructive:            var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border:                 var(--border);
+  --color-input:                  var(--input);
+  --color-ring:                   var(--ring);
+  --color-chart-1:                var(--chart-1);
+  --color-chart-2:                var(--chart-2);
+  --color-chart-3:                var(--chart-3);
+  --color-chart-4:                var(--chart-4);
+  --color-chart-5:                var(--chart-5);
+
+  /* Extras (shadcn não define) → bg-surface, text-text-muted, bg-success... */
+  --color-surface:            var(--surface);
+  --color-surface-alt:        var(--surface-alt);
+  --color-text-muted:         var(--text-muted);
+  --color-text-muted-strong:  var(--text-muted-strong);
+  --color-success:            var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning:            var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-danger:             var(--danger);
+
+  /* Marca → bg-brand-navy, text-brand-teal-bright... */
+  --color-brand-navy:        var(--brand-navy);
+  --color-brand-navy-ink:    var(--brand-navy-ink);
+  --color-brand-navy-muted:  var(--brand-navy-muted);
+  --color-brand-teal:        var(--brand-teal);
+  --color-brand-teal-bright: var(--brand-teal-bright);
+  --color-brand-green:       var(--brand-green);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Base tipográfica (consome vars; sem HEX)
+   ───────────────────────────────────────────────────────────── */
+body { background-color: var(--background); color: var(--foreground); font-family: var(--font-sans); font-size: 1rem; font-weight: 400; line-height: 1.6; }
+h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 500; }
+h1 { font-size: 2.5rem;  line-height: 1.1; }
+h2 { font-size: 2rem;    line-height: 1.15; }
+h3 { font-size: 1.5rem;  line-height: 1.2; }
+h4 { font-size: 1.25rem; line-height: 1.25; }
+h5 { font-family: var(--font-sans); font-weight: 600; font-size: 1.125rem; line-height: 1.3; }
+h6 { font-family: var(--font-sans); font-weight: 600; font-size: 1rem; line-height: 1.4; }
+.caption { font-size: 0.8125rem; line-height: 1.4; color: var(--text-muted-strong); }
+.data    { font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.45; font-variant-numeric: tabular-nums; }
+.label   { text-transform: uppercase; letter-spacing: var(--tracking-label); }
+
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "aoranow",
+  "homepage": "https://github.com/aoranow-ai-developer/aora-design",
+  "items": [
+    {
+      "name": "theme",
+      "type": "registry:file",
+      "title": "AoraNow theme",
+      "description": "Tokens do AoraNow (cores/raio/fontes, claro + .dark) — Tailwind v4. Consumir com @import \"./aora-theme.css\".",
+      "files": [
+        {
+          "path": "src/aora-theme.css",
+          "type": "registry:file",
+          "target": "src/aora-theme.css"
+        }
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:component",
+      "title": "EmptyState",
+      "description": "Estado vazio do AoraNow (ícone + título + descrição + CTA).",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "src/components/aora/empty-state.tsx",
+          "type": "registry:component",
+          "target": "components/aora/empty-state.tsx"
+        }
+      ]
+    }
+  ]
+}
