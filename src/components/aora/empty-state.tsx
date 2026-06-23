@@ -1,8 +1,8 @@
 import type { LucideIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-// EmptyState (aora): ícone + título + descrição + CTA. Distingue vazio-de-verdade
-// de vazio-por-filtro (este oferece "limpar filtros").
+// EmptyState (aora): icon + title + description + CTA. Distinguishes a true-empty
+// from an empty-by-filter (the latter offers "clear filters").
 export function EmptyState({
   Icon,
   title,

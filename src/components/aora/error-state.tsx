@@ -1,9 +1,9 @@
 import { AlertTriangle, RotateCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-// ErrorState (aora): falha ao buscar dados. role=alert + retry.
+// ErrorState (aora): failed to fetch data. role=alert + retry.
 export function ErrorState({
-  message = 'Falha ao consultar o servidor.',
+  message = 'Failed to reach the server.',
   onRetry,
 }: {
   message?: string
@@ -14,11 +14,11 @@ export function ErrorState({
       <div className="mb-4 rounded-full bg-[color-mix(in_srgb,var(--destructive)_14%,transparent)] p-3">
         <AlertTriangle className="text-destructive size-6" aria-hidden />
       </div>
-      <h3 className="font-display text-lg">Algo quebrou</h3>
+      <h3 className="font-display text-lg">Something went wrong</h3>
       <p className="caption mt-1 max-w-sm">{message}</p>
       {onRetry && (
         <Button variant="outline" className="mt-4 rounded-pill" onClick={onRetry}>
-          <RotateCw className="size-4" aria-hidden /> Tentar de novo
+          <RotateCw className="size-4" aria-hidden /> Retry
         </Button>
       )}
     </div>

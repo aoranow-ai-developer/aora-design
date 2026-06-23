@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/command'
 import { CONTEXTS, PROJECTS } from '@/lib/mock'
 
-// ⌘K — busca global de projeto/contexto (liga em busca/resolução de projeto).
+// ⌘K — global project/context search (hooks into project search/resolution).
 export function CommandMenu({
   open,
   onOpenChange,
@@ -39,20 +39,20 @@ export function CommandMenu({
   }
 
   return (
-    <CommandDialog open={open} onOpenChange={onOpenChange} title="Busca" description="Projetos e contextos">
+    <CommandDialog open={open} onOpenChange={onOpenChange} title="Search" description="Projects and contexts">
       <Command>
-        <CommandInput placeholder="Buscar projeto, contexto, issue…" />
+        <CommandInput placeholder="Search project, context, issue…" />
         <CommandList>
-        <CommandEmpty>Nada encontrado.</CommandEmpty>
-        <CommandGroup heading="Projetos">
+        <CommandEmpty>Nothing found.</CommandEmpty>
+        <CommandGroup heading="Projects">
           {PROJECTS.map((p) => (
-            <CommandItem key={p} onSelect={() => pick(`Projeto: ${p}`)}>
+            <CommandItem key={p} onSelect={() => pick(`Project: ${p}`)}>
               <Folder className="size-4" /> {p}
             </CommandItem>
           ))}
         </CommandGroup>
         <CommandSeparator />
-        <CommandGroup heading="Contextos">
+        <CommandGroup heading="Contexts">
           {CONTEXTS.slice(0, 6).map((c) => (
             <CommandItem key={c.id} value={`${c.id} ${c.title}`} onSelect={() => pick(c.id)}>
               <FileText className="size-4" /> <span className="data text-muted-foreground">{c.id}</span> {c.title}

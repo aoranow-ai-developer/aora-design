@@ -17,7 +17,7 @@ import {
 
 export type ContextAction = 'aprovar' | 'revisao' | 'descartar' | 'stale'
 
-// Uso de showcase: as colunas do showcase sobre o DataTable genérico do design system.
+// Showcase usage: the showcase columns on top of the design system's generic DataTable.
 export function ContextsTable({
   data,
   onRowClick,
@@ -36,12 +36,12 @@ export function ContextsTable({
         <Checkbox
           checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
           onCheckedChange={(v) => table.toggleAllPageRowsSelected(!!v)}
-          aria-label="Selecionar tudo"
+          aria-label="Select all"
         />
       ),
       cell: ({ row }) => (
         <div onClick={(e) => e.stopPropagation()}>
-          <Checkbox checked={row.getIsSelected()} onCheckedChange={(v) => row.toggleSelected(!!v)} aria-label="Selecionar linha" />
+          <Checkbox checked={row.getIsSelected()} onCheckedChange={(v) => row.toggleSelected(!!v)} aria-label="Select row" />
         </div>
       ),
       enableSorting: false,
@@ -53,17 +53,17 @@ export function ContextsTable({
     },
     {
       accessorKey: 'project',
-      header: ({ column }) => <SortHead label="Projeto" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} />,
+      header: ({ column }) => <SortHead label="Project" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} />,
       cell: ({ row }) => <span className="font-semibold whitespace-nowrap">{row.original.project}</span>,
     },
     {
       accessorKey: 'title',
-      header: () => <span className="px-1">Contexto</span>,
+      header: () => <span className="px-1">Context</span>,
       cell: ({ row }) => <span className="block max-w-[22rem] truncate">{row.original.title}</span>,
     },
     {
       accessorKey: 'source',
-      header: () => <span className="px-1">Fonte</span>,
+      header: () => <span className="px-1">Source</span>,
       cell: ({ row }) => <span className="data text-muted-foreground text-xs whitespace-nowrap">{row.original.source}</span>,
     },
     {
@@ -83,7 +83,7 @@ export function ContextsTable({
     },
     {
       accessorKey: 'updated',
-      header: ({ column }) => <SortHead label="Atualizado" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} />,
+      header: ({ column }) => <SortHead label="Updated" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} />,
       cell: ({ row }) => <span className="data tabular-nums text-muted-foreground whitespace-nowrap">{row.original.updated}</span>,
     },
     {
@@ -94,7 +94,7 @@ export function ContextsTable({
           <div onClick={(e) => e.stopPropagation()} className="text-right">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="size-8 rounded-md" aria-label="Ações">
+                <Button variant="ghost" size="icon" className="size-8 rounded-md" aria-label="Actions">
                   <MoreHorizontal className="size-4" aria-hidden />
                 </Button>
               </DropdownMenuTrigger>
@@ -102,17 +102,17 @@ export function ContextsTable({
                 <DropdownMenuLabel>{ctx.id}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => onAction(ctx, 'aprovar')}>
-                  <CheckCircle2 className="size-4 text-success" /> Aprovar
+                  <CheckCircle2 className="size-4 text-success" /> Approve
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => onAction(ctx, 'revisao')}>
-                  <Clock className="size-4 text-warning" /> Marcar em revisão
+                  <Clock className="size-4 text-warning" /> Mark in review
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => onAction(ctx, 'stale')}>
-                  <AlertTriangle className="size-4 text-muted-foreground" /> Marcar stale
+                  <AlertTriangle className="size-4 text-muted-foreground" /> Mark stale
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem variant="destructive" onClick={() => onAction(ctx, 'descartar')}>
-                  <XCircle className="size-4" /> Descartar
+                  <XCircle className="size-4" /> Discard
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -127,8 +127,8 @@ export function ContextsTable({
     <DataTable
       columns={columns}
       data={data}
-      searchPlaceholder="Filtrar contextos…"
-      itemLabel="contextos"
+      searchPlaceholder="Filter contexts…"
+      itemLabel="contexts"
       onRowClick={onRowClick}
       renderSelectionActions={(rows, clear) => (
         <Button
@@ -139,7 +139,7 @@ export function ContextsTable({
             clear()
           }}
         >
-          Aprovar
+          Approve
         </Button>
       )}
     />

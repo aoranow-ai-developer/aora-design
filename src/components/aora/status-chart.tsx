@@ -7,13 +7,13 @@ import {
 } from '@/components/ui/chart'
 import { CONTEXTS, PROJECTS, countByStatus, type ContextStatus } from '@/lib/mock'
 
-// Donut da distribuição de status (🟢🟡🔴⚪). Cores = tokens de estado,
-// então troca de tema junto. PieChart de tamanho FIXO (sem ResponsiveContainer:
-// ele media largura errada em troca de view e clipava o pie).
+// Status distribution donut (🟢🟡🔴⚪). Colors = state tokens,
+// so they switch with the theme. FIXED-size PieChart (no ResponsiveContainer:
+// it measured the wrong width on view switch and clipped the pie).
 const STATUS_TOKEN: Record<ContextStatus, { label: string; color: string }> = {
-  aprovado: { label: 'Aprovado', color: 'var(--success)' },
-  revisao: { label: 'Em revisão', color: 'var(--warning)' },
-  descartado: { label: 'Descartado', color: 'var(--destructive)' },
+  aprovado: { label: 'Approved', color: 'var(--success)' },
+  revisao: { label: 'In review', color: 'var(--warning)' },
+  descartado: { label: 'Discarded', color: 'var(--destructive)' },
   stale: { label: 'Stale', color: 'var(--muted-foreground)' },
 }
 
@@ -53,9 +53,9 @@ export function StatusDonut() {
   )
 }
 
-// Barras de contextos por projeto (paleta de chart por tema). Aqui o
-// ResponsiveContainer serve (BarChart preenche a largura medida sem clipar).
-const projConfig = { value: { label: 'Contextos', color: 'var(--chart-1)' } } satisfies ChartConfig
+// Contexts-per-project bars (chart palette per theme). Here the
+// ResponsiveContainer works (BarChart fills the measured width without clipping).
+const projConfig = { value: { label: 'Contexts', color: 'var(--chart-1)' } } satisfies ChartConfig
 
 export function ProjectBars() {
   const data = PROJECTS.map((p) => ({

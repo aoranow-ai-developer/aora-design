@@ -7,7 +7,7 @@
       "name": "theme",
       "type": "registry:file",
       "title": "AoraNow theme",
-      "description": "Tokens do AoraNow (cores/raio/fontes, claro + .dark) — Tailwind v4. Consumir com @import \"./aora-theme.css\".",
+      "description": "AoraNow tokens (colors/radius/fonts, light + .dark) — Tailwind v4. Consume with @import \"./aora-theme.css\".",
       "files": [
         { "path": "src/aora-theme.css", "type": "registry:file", "target": "src/aora-theme.css" }
       ]
@@ -16,7 +16,7 @@
       "name": "status-badge",
       "type": "registry:component",
       "title": "StatusBadge",
-      "description": "Badge de status (cor + ícone + rótulo; nunca só-cor). Vocabulário aprovado/revisao/descartado/stale.",
+      "description": "Status badge (color + icon + label; never color-only). Vocabulary aprovado/revisao/descartado/stale.",
       "dependencies": ["lucide-react"],
       "files": [
         { "path": "src/components/aora/status-badge.tsx", "type": "registry:component", "target": "components/aora/status-badge.tsx" }
@@ -26,7 +26,7 @@
       "name": "empty-state",
       "type": "registry:component",
       "title": "EmptyState",
-      "description": "Estado vazio (ícone + título + descrição + CTA).",
+      "description": "Empty state (icon + title + description + CTA).",
       "dependencies": ["lucide-react"],
       "registryDependencies": ["button"],
       "files": [
@@ -37,7 +37,7 @@
       "name": "error-state",
       "type": "registry:component",
       "title": "ErrorState",
-      "description": "Estado de erro (ícone + mensagem + retry; role=alert).",
+      "description": "Error state (icon + message + retry; role=alert).",
       "dependencies": ["lucide-react"],
       "registryDependencies": ["button"],
       "files": [
@@ -48,7 +48,7 @@
       "name": "kpi-card",
       "type": "registry:component",
       "title": "KpiCard",
-      "description": "Tile de KPI (valor + delta + hint).",
+      "description": "KPI tile (value + delta + hint).",
       "dependencies": ["lucide-react"],
       "registryDependencies": ["card"],
       "files": [
@@ -59,7 +59,7 @@
       "name": "data-table",
       "type": "registry:component",
       "title": "DataTable",
-      "description": "Tabela densa genérica DataTable<T> (TanStack): sort, filtro, seleção, paginação, sticky header.",
+      "description": "Generic dense table DataTable<T> (TanStack): sort, filter, selection, pagination, sticky header.",
       "dependencies": ["@tanstack/react-table", "lucide-react"],
       "registryDependencies": ["button", "input", "table"],
       "files": [
@@ -70,7 +70,7 @@
       "name": "app-shell",
       "type": "registry:component",
       "title": "AppShell",
-      "description": "Shell de dashboard (sidebar + topbar), nav por props.",
+      "description": "Dashboard shell (sidebar + topbar), nav via props.",
       "dependencies": ["lucide-react"],
       "registryDependencies": ["button", "avatar"],
       "files": [
@@ -81,7 +81,7 @@
       "name": "base",
       "type": "registry:block",
       "title": "AoraNow base kit",
-      "description": "Bundle: theme + todos os componentes do design system AoraNow.",
+      "description": "Bundle: theme + all components of the AoraNow design system.",
       "registryDependencies": [
         "@aoranow/theme",
         "@aoranow/status-badge",
@@ -97,7 +97,7 @@
       "name": "design",
       "type": "registry:file",
       "title": "DESIGN.md",
-      "description": "Guia de design (design-system-em-texto) lido pelo agente antes de construir UI.",
+      "description": "Design guide (design-system-as-text) read by the agent before building UI.",
       "files": [
         { "path": "DESIGN.md", "type": "registry:file", "target": "DESIGN.md" }
       ]

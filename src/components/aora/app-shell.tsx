@@ -9,8 +9,8 @@ export interface ShellNavItem {
   Icon: LucideIcon
 }
 
-// Shell de dashboard (aora): sidebar de navegação + topbar (busca/⌘K, tema, avatar).
-// Genérico — a navegação vem por props.
+// Dashboard shell (aora): navigation sidebar + topbar (search/⌘K, theme, avatar).
+// Generic — navigation comes via props.
 export function AppShell({
   brand = 'AoraNow',
   nav,
@@ -80,7 +80,7 @@ export function AppShell({
               onClick={onOpenCommand}
               className="text-muted-foreground border-border bg-surface hover:bg-surface-alt ml-auto flex items-center gap-2 rounded-pill border px-3 py-1.5 text-sm transition-colors"
             >
-              <Search className="size-3.5" aria-hidden /> Buscar
+              <Search className="size-3.5" aria-hidden /> Search
               <kbd className="data bg-surface-alt rounded px-1.5 text-[0.7rem]">⌘K</kbd>
             </button>
           )}
@@ -88,7 +88,7 @@ export function AppShell({
             variant="outline"
             size="icon"
             className={onOpenCommand ? 'rounded-pill' : 'ml-auto rounded-pill'}
-            aria-label="Alternar tema"
+            aria-label="Toggle theme"
             onClick={() => setDark(!dark)}
           >
             {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}

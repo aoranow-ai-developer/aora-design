@@ -22,7 +22,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-// Cabeçalho clicável de ordenação — use nas suas ColumnDef.
+// Clickable sort header — use it in your ColumnDef.
 export function SortHead({ label, onClick }: { label: string; onClick: () => void }) {
   return (
     <Button variant="ghost" className="-ml-2 h-8 rounded-md px-2 text-muted-foreground" onClick={onClick}>
@@ -36,20 +36,20 @@ interface DataTableProps<T> {
   columns: ColumnDef<T>[]
   data: T[]
   searchPlaceholder?: string
-  itemLabel?: string // p/ a contagem ("12 contextos")
+  itemLabel?: string // for the count ("12 contexts")
   pageSize?: number
   onRowClick?: (row: T) => void
-  // ações em massa: recebe as linhas selecionadas + um clear()
+  // bulk actions: receives the selected rows + a clear()
   renderSelectionActions?: (rows: T[], clearSelection: () => void) => ReactNode
 }
 
-// DataTable genérica (aora): TanStack headless + ui/table. Sort, filtro global,
-// seleção, paginação, sticky header, rola no próprio container (sem scroll-x no body).
+// Generic DataTable (aora): TanStack headless + ui/table. Sort, global filter,
+// selection, pagination, sticky header, scrolls in its own container (no scroll-x on the body).
 export function DataTable<T>({
   columns,
   data,
-  searchPlaceholder = 'Filtrar…',
-  itemLabel = 'itens',
+  searchPlaceholder = 'Filter…',
+  itemLabel = 'items',
   pageSize = 8,
   onRowClick,
   renderSelectionActions,
@@ -89,7 +89,7 @@ export function DataTable<T>({
         </div>
         {renderSelectionActions && selectedRows.length > 0 && (
           <div className="flex items-center gap-2 rounded-pill bg-[color-mix(in_srgb,var(--accent)_10%,transparent)] py-1 pr-1 pl-3 text-sm">
-            <span className="tabular-nums font-semibold text-accent">{selectedRows.length} selecionado(s)</span>
+            <span className="tabular-nums font-semibold text-accent">{selectedRows.length} selected</span>
             {renderSelectionActions(selectedRows, () => setRowSelection({}))}
           </div>
         )}
@@ -98,7 +98,7 @@ export function DataTable<T>({
         </span>
       </div>
 
-      {/* Tabela: rola no próprio container, sticky header */}
+      {/* Table: scrolls in its own container, sticky header */}
       <div className="border-border max-h-[26rem] overflow-auto rounded-card border">
         <Table>
           <TableHeader className="bg-surface sticky top-0 z-10">
@@ -129,17 +129,17 @@ export function DataTable<T>({
         </Table>
       </div>
 
-      {/* Paginação */}
+      {/* Pagination */}
       <div className="flex items-center justify-between px-1 pt-4">
         <span className="caption">
-          Página {table.getState().pagination.pageIndex + 1} de {table.getPageCount()}
+          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
         </span>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" className="rounded-pill" disabled={!table.getCanPreviousPage()} onClick={() => table.previousPage()}>
-            <ChevronLeft className="size-4" aria-hidden /> Anterior
+            <ChevronLeft className="size-4" aria-hidden /> Previous
           </Button>
           <Button variant="outline" size="sm" className="rounded-pill" disabled={!table.getCanNextPage()} onClick={() => table.nextPage()}>
-            Próxima <ChevronRight className="size-4" aria-hidden />
+            Next <ChevronRight className="size-4" aria-hidden />
           </Button>
         </div>
       </div>

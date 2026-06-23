@@ -1,25 +1,25 @@
-/* class-based dark mode: faz os utilitários `dark:` dos componentes shadcn
-   seguirem a classe .dark (em vez de prefers-color-scheme). Nosso swap de
-   tema principal já vem das CSS vars redefinidas em .dark. */
+/* class-based dark mode: makes the `dark:` utilities of the shadcn components
+   follow the .dark class (instead of prefers-color-scheme). Our main theme
+   swap already comes from the CSS vars redefined in .dark. */
 @custom-variant dark (&:is(.dark *));
 
 /* ─────────────────────────────────────────────────────────────
-   TEMA CLARO (default de vitrine/docs) — :root
-   Cores temáveis + obrigatórias do shadcn + extras, e as vars de
-   runtime que NÃO são namespaces do Tailwind (z-index/motion/opacity).
-   ÚNICO lugar (junto com .dark) onde HEX de cor pode aparecer.
+   LIGHT THEME (default for showcase/docs) — :root
+   Themeable colors + shadcn-required + extras, and the runtime
+   vars that are NOT Tailwind namespaces (z-index/motion/opacity).
+   ONLY place (together with .dark) where a color HEX may appear.
    ───────────────────────────────────────────────────────────── */
 :root {
-  /* — Marca (constantes; não mudam entre temas) — */
+  /* — Brand (constants; do not change between themes) — */
   --brand-navy:        #092F49;
   --brand-navy-ink:    #23323C;
-  --brand-navy-muted:  #6D8595; /* só UI/ícone/borda — NÃO texto de corpo (3.4:1) */
+  --brand-navy-muted:  #6D8595; /* UI/icon/border only — NOT body text (3.4:1) */
   --brand-teal:        #1C645F;
   --brand-teal-bright: #39C5BB; /* "Miku" */
   --brand-green:       #528E62;
   --brand-gradient: linear-gradient(219deg, #123A56 9%, #1C645F 68%, #528E62 100%);
 
-  /* — Superfícies / base — */
+  /* — Surfaces / base — */
   --background:  #EEF2F6;
   --foreground:  #23323C;
   --surface:     #FBFCFD;   /* extra (= --card / --popover) */
@@ -33,46 +33,46 @@
   --secondary:            var(--surface-alt);
   --secondary-foreground: var(--foreground);
 
-  /* — COLISÃO muted (resolvida) —
-     Nosso "muted" é TEXTO secundário; o shadcn --muted é FUNDO e
-     --muted-foreground é o TEXTO. Logo: --muted := surface-alt (fundo);
-     --muted-foreground := nosso texto secundário (escurecido p/ passar AA);
-     nosso "muted" de texto fica explícito em --text-muted. */
-  --muted:             var(--surface-alt);   /* FUNDO (shadcn) */
-  --muted-foreground:  #54697A;              /* TEXTO secundário — 5.07:1 bg / 4.71:1 surface-alt (AA) */
-  --text-muted:        #54697A;              /* alias do nosso "muted" de texto, já AA */
-  --text-muted-strong: #5A7080;              /* texto pequeno/caption — 4.59:1 bg (AA) */
+  /* — muted COLLISION (resolved) —
+     Our "muted" is secondary TEXT; the shadcn --muted is BACKGROUND and
+     --muted-foreground is the TEXT. So: --muted := surface-alt (background);
+     --muted-foreground := our secondary text (darkened to pass AA);
+     our text "muted" is made explicit in --text-muted. */
+  --muted:             var(--surface-alt);   /* BACKGROUND (shadcn) */
+  --muted-foreground:  #54697A;              /* secondary TEXT — 5.07:1 bg / 4.71:1 surface-alt (AA) */
+  --text-muted:        #54697A;              /* alias of our text "muted", already AA */
+  --text-muted-strong: #5A7080;              /* small text/caption — 4.59:1 bg (AA) */
 
-  /* — Primária / acento — */
+  /* — Primary / accent — */
   --primary:            #092F49;
   --primary-foreground: #FFFFFF;
   --accent:             #1C645F;
   --accent-foreground:  #FFFFFF;
 
-  /* — Bordas / input / ring — */
+  /* — Borders / input / ring — */
   --border:        #DCE3E8;
   --border-strong: #C7D2DA;              /* extra */
-  --input:         var(--border-strong); /* shadcn --input = borda do input */
+  --input:         var(--border-strong); /* shadcn --input = input border */
   --ring:          #1C645F;
 
-  /* — Status (success/warning são extras; danger→destructive) — */
+  /* — Status (success/warning are extras; danger→destructive) — */
   --success:                #1C645F;
   --success-foreground:     #FFFFFF;
   --warning:                #92610A;
   --warning-foreground:     #FFFFFF;
-  --destructive:            #B42318; /* nosso "danger" */
+  --destructive:            #B42318; /* our "danger" */
   --destructive-foreground: #FFFFFF;
-  --danger:                 var(--destructive);            /* alias do nosso nome */
+  --danger:                 var(--destructive);            /* alias of our name */
   --danger-foreground:      var(--destructive-foreground);
 
-  /* — Charts (tema claro) — */
+  /* — Charts (light theme) — */
   --chart-1: #1C645F;
   --chart-2: #092F49;
   --chart-3: #528E62;
   --chart-4: #6D8595;
   --chart-5: #92610A;
 
-  /* — Runtime-only (não viram utilitário; usar via var()/arbitrário) — */
+  /* — Runtime-only (do not become utilities; use via var()/arbitrary) — */
   --z-dropdown: 1000;
   --z-sticky:   1100;
   --z-popover:  1200;
@@ -89,8 +89,8 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   TEMA ESCURO (default do dashboard) — .dark
-   Remapeia só o que muda; constantes/scale/runtime herdam do :root.
+   DARK THEME (dashboard default) — .dark
+   Remaps only what changes; constants/scale/runtime inherit from :root.
    ───────────────────────────────────────────────────────────── */
 .dark {
   --background:  #0C1A24;
@@ -105,10 +105,10 @@
   --secondary:            var(--surface-alt);
   --secondary-foreground: var(--foreground);
 
-  --muted:             var(--surface-alt);   /* FUNDO */
-  --muted-foreground:  #9DB0BC;              /* TEXTO secundário — 7.88:1 (AA) */
+  --muted:             var(--surface-alt);   /* BACKGROUND */
+  --muted-foreground:  #9DB0BC;              /* secondary TEXT — 7.88:1 (AA) */
   --text-muted:        #9DB0BC;
-  --text-muted-strong: #9DB0BC;              /* dark não distingue; cai no muted */
+  --text-muted-strong: #9DB0BC;              /* dark does not distinguish; falls back to muted */
 
   --primary:            #39C5BB;
   --primary-foreground: #0C1A24;
@@ -129,35 +129,35 @@
   --danger:                 var(--destructive);
   --danger-foreground:      var(--destructive-foreground);
 
-  /* Charts (paleta dark própria — clara o suficiente p/ ≥3:1 sobre #0C1A24) */
+  /* Charts (dedicated dark palette — light enough for ≥3:1 over #0C1A24) */
   --chart-1: #39C5BB; /* teal-bright  8.31:1 */
-  --chart-2: #7FB3E0; /* azul         7.93:1 */
-  --chart-3: #6FC082; /* verde        8.02:1 */
+  --chart-2: #7FB3E0; /* blue         7.93:1 */
+  --chart-3: #6FC082; /* green        8.02:1 */
   --chart-4: #9DB0BC; /* slate        7.88:1 */
-  --chart-5: #E5B95C; /* âmbar        9.61:1 */
+  --chart-5: #E5B95C; /* amber        9.61:1 */
 }
 
 /* ─────────────────────────────────────────────────────────────
-   @theme — escala de design ESTÁTICA (não muda por tema).
-   Valores LITERAIS (não auto-referenciar) → vira utilitário + var global.
+   @theme — STATIC design scale (does not change per theme).
+   LITERAL values (do not self-reference) → become a utility + global var.
    ───────────────────────────────────────────────────────────── */
 @theme {
-  /* Fontes → font-display / font-sans / font-mono / font-jp */
+  /* Fonts → font-display / font-sans / font-mono / font-jp */
   --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-sans:    "Inter", "Noto Sans", "Noto Sans JP", system-ui, sans-serif;
   --font-mono:    "JetBrains Mono", ui-monospace, monospace;
   --font-jp:      "Noto Sans JP", "Noto Sans", system-ui, sans-serif;
 
-  /* Espaçamento base-4 (Tailwind deriva p-1..p-16 daqui) */
+  /* Base-4 spacing (Tailwind derives p-1..p-16 from here) */
   --spacing: 0.25rem;
 
-  /* Raio (shadcn deriva o default daqui; componentes-chave sobrescrevem — ver §3) */
+  /* Radius (shadcn derives the default from here; key components override — see §3) */
   --radius:      0.75rem;
   --radius-sm:   0.5rem;
   --radius-md:   0.75rem;
-  --radius-lg:   0.75rem;  /* shadcn usa rounded-lg em dropdown/popover/input/etc — raio de COMPONENTE, não hero (era 3rem → comia texto) */
+  --radius-lg:   0.75rem;  /* shadcn uses rounded-lg on dropdown/popover/input/etc — COMPONENT radius, not hero (was 3rem → clipped text) */
   --radius-card: 1.5rem;
-  --radius-hero: 3rem;     /* heros/landings — uso explícito nosso, fora do shadcn (era o --radius-lg) */
+  --radius-hero: 3rem;     /* heros/landings — our explicit use, outside shadcn (was --radius-lg) */
   --radius-pill: 9999px;
   --radius-full: 50%;
 
@@ -167,22 +167,22 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
 
-  /* Elevação (navy-tinted; --shadow-focus usa var(--ring), resolve por tema) */
+  /* Elevation (navy-tinted; --shadow-focus uses var(--ring), resolves per theme) */
   --shadow-sm:    0 1px 2px 0 rgb(9 47 73 / 0.06);
   --shadow-md:    0 4px 12px -2px rgb(9 47 73 / 0.10);
   --shadow-lg:    0 12px 32px -8px rgb(9 47 73 / 0.16);
   --shadow-focus: 0 0 0 2px var(--ring);
 
-  /* Easing + tracking (literais) */
+  /* Easing + tracking (literals) */
   --ease-standard:   cubic-bezier(0.2, 0, 0, 1);
   --ease-emphasized: cubic-bezier(0.2, 0, 0, 1.2);
   --tracking-label:  0.12em;
 }
 
 /* ─────────────────────────────────────────────────────────────
-   @theme inline — SÓ cores: mapeia utilitário → var temável.
-   "inline" faz o utilitário referenciar var(--*), então o switch
-   .dark funciona sem regenerar classes. (Nada auto-referenciado.)
+   @theme inline — colors ONLY: maps utility → themeable var.
+   "inline" makes the utility reference var(--*), so the .dark
+   switch works without regenerating classes. (Nothing self-referenced.)
    ───────────────────────────────────────────────────────────── */
 @theme inline {
   --color-background:             var(--background);
@@ -210,7 +210,7 @@
   --color-chart-4:                var(--chart-4);
   --color-chart-5:                var(--chart-5);
 
-  /* Extras (shadcn não define) → bg-surface, text-text-muted, bg-success... */
+  /* Extras (shadcn does not define) → bg-surface, text-text-muted, bg-success... */
   --color-surface:            var(--surface);
   --color-surface-alt:        var(--surface-alt);
   --color-text-muted:         var(--text-muted);
@@ -221,7 +221,7 @@
   --color-warning-foreground: var(--warning-foreground);
   --color-danger:             var(--danger);
 
-  /* Marca → bg-brand-navy, text-brand-teal-bright... */
+  /* Brand → bg-brand-navy, text-brand-teal-bright... */
   --color-brand-navy:        var(--brand-navy);
   --color-brand-navy-ink:    var(--brand-navy-ink);
   --color-brand-navy-muted:  var(--brand-navy-muted);
@@ -231,7 +231,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Base tipográfica (consome vars; sem HEX)
+   Typographic base (consumes vars; no HEX)
    ───────────────────────────────────────────────────────────── */
 body { background-color: var(--background); color: var(--foreground); font-family: var(--font-sans); font-size: 1rem; font-weight: 400; line-height: 1.6; }
 h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 500; }

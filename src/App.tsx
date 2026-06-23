@@ -18,24 +18,24 @@ import { CONTEXTS, countByStatus, type ContextItem } from '@/lib/mock'
 type View = 'overview' | 'contexts' | 'states' | 'kitchen'
 
 const NAV: ShellNavItem[] = [
-  { id: 'overview', label: 'Visão geral', Icon: LayoutDashboard },
-  { id: 'contexts', label: 'Contextos', Icon: Database },
-  { id: 'states', label: 'Estados', Icon: AlertTriangle },
-  { id: 'kitchen', label: 'Componentes', Icon: Boxes },
+  { id: 'overview', label: 'Overview', Icon: LayoutDashboard },
+  { id: 'contexts', label: 'Contexts', Icon: Database },
+  { id: 'states', label: 'States', Icon: AlertTriangle },
+  { id: 'kitchen', label: 'Components', Icon: Boxes },
 ]
 
 const TITLES: Record<View, string> = {
-  overview: 'Visão geral',
-  contexts: 'Contextos',
-  states: 'Estados de dados',
-  kitchen: 'Componentes (kitchen sink)',
+  overview: 'Overview',
+  contexts: 'Contexts',
+  states: 'Data states',
+  kitchen: 'Components (kitchen sink)',
 }
 
 const ACTION_LABEL: Record<ContextAction, string> = {
-  aprovar: 'aprovado',
-  revisao: 'movido p/ revisão',
-  descartar: 'descartado',
-  stale: 'marcado stale',
+  aprovar: 'approved',
+  revisao: 'moved to review',
+  descartar: 'discarded',
+  stale: 'marked stale',
 }
 
 function ChartCard({ title, children }: { title: string; children: React.ReactNode }) {
@@ -48,7 +48,7 @@ function ChartCard({ title, children }: { title: string; children: React.ReactNo
 }
 
 function App() {
-  const [dark, setDark] = useState(false) // claro = default
+  const [dark, setDark] = useState(false) // light = default
   const [view, setView] = useState<View>('overview')
   const [cmdOpen, setCmdOpen] = useState(false)
   const [detail, setDetail] = useState<ContextItem | null>(null)
@@ -84,16 +84,16 @@ function App() {
       {view === 'overview' && (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <KpiCard label="Contextos" value={String(total)} Icon={Database} delta={12} hint="vs. semana passada" accent />
-            <KpiCard label="Taxa de aprovação" value={`${approvalRate}%`} Icon={Percent} delta={4} />
-            <KpiCard label="Em revisão" value={String(counts.revisao)} Icon={Clock} hint="aguardando humano" />
-            <KpiCard label="Stale" value={String(counts.stale)} Icon={AlertTriangle} delta={-8} hint="precisam refresh" />
+            <KpiCard label="Contexts" value={String(total)} Icon={Database} delta={12} hint="vs. last week" accent />
+            <KpiCard label="Approval rate" value={`${approvalRate}%`} Icon={Percent} delta={4} />
+            <KpiCard label="In review" value={String(counts.revisao)} Icon={Clock} hint="awaiting review" />
+            <KpiCard label="Stale" value={String(counts.stale)} Icon={AlertTriangle} delta={-8} hint="need refresh" />
           </div>
           <div className="grid gap-5 lg:grid-cols-2">
-            <ChartCard title="Distribuição de status (🟢🟡🔴⚪)">
+            <ChartCard title="Status distribution (🟢🟡🔴⚪)">
               <StatusDonut />
             </ChartCard>
-            <ChartCard title="Contextos por projeto">
+            <ChartCard title="Contexts by project">
               <ProjectBars />
             </ChartCard>
           </div>
@@ -106,7 +106,7 @@ function App() {
             data={CONTEXTS}
             onRowClick={setDetail}
             onAction={onAction}
-            onBulkApprove={(rows) => toast.success(`${rows.length} contextos aprovados`, { description: 'Confirmação humana registrada.' })}
+            onBulkApprove={(rows) => toast.success(`${rows.length} contexts approved`, { description: 'Human confirmation recorded.' })}
           />
         </Card>
       )}
@@ -114,7 +114,7 @@ function App() {
       {view === 'states' && (
         <div className="space-y-5">
           <Card className="gap-3 p-5">
-            <h3 className="label text-muted-foreground text-xs">// Skeleton (carregando a grade)</h3>
+            <h3 className="label text-muted-foreground text-xs">// Skeleton (loading the grid)</h3>
             <div className="space-y-3">
               {[0, 1, 2, 3].map((i) => (
                 <div key={i} className="flex items-center gap-4">
@@ -129,14 +129,14 @@ function App() {
           <Card className="p-0 overflow-hidden">
             <EmptyState
               Icon={FilterX}
-              title="Nenhum contexto encontrado"
-              description="Nenhum resultado para o filtro atual. Tente limpar os filtros ou importar um novo contexto."
-              actionLabel="Limpar filtros"
-              onAction={() => toast('Filtros limpos')}
+              title="No contexts found"
+              description="No results for the current filter. Try clearing the filters or importing a new context."
+              actionLabel="Clear filters"
+              onAction={() => toast('Filters cleared')}
             />
           </Card>
           <Card className="p-0 overflow-hidden">
-            <ErrorState onRetry={() => toast.success('Reconectado ao gateway')} />
+            <ErrorState onRetry={() => toast.success('Reconnected to the gateway')} />
           </Card>
         </div>
       )}
@@ -144,8 +144,8 @@ function App() {
       {view === 'kitchen' && <KitchenSink />}
 
       <ContextDetailDialog ctx={detail} onOpenChange={(o) => !o && setDetail(null)} onAction={onAction} />
-      <CommandMenu open={cmdOpen} onOpenChange={setCmdOpen} onPick={(label) => toast(`Abrindo ${label}`)} />
-      {/* description vem apagada por padrão (ilegível no claro) → mesma cor do título */}
+      <CommandMenu open={cmdOpen} onOpenChange={setCmdOpen} onPick={(label) => toast(`Opening ${label}`)} />
+      {/* description comes muted by default (illegible on light) → same color as the title */}
       <Toaster toastOptions={{ classNames: { toast: 'cn-toast', description: '!text-popover-foreground' } }} />
     </AppShell>
   )

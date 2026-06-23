@@ -1,58 +1,58 @@
 # DESIGN.md — AoraNow Design System
 
-> **O guia de design lido pelo agente antes de construir UI.** "AGENTS.md = como construir; DESIGN.md = como deve parecer."
+> **The design guide the agent reads before building UI.** "AGENTS.md = how to build; DESIGN.md = how it should look."
 >
 > | | |
 > |---|---|
-> | `spec_source` | vault interno do AoraNow (DESIGN.md mestre do design system) |
+> | `spec_source` | AoraNow internal vault (master DESIGN.md of the design system) |
 > | `exported` | 2026-06-23 |
-> | autoria | **o vault é a fonte de autoria**; este arquivo é o guia do design system (cópia viva). Mudança de identidade/token nasce no vault e re-exporta. |
+> | authorship | **the vault is the authoring source**; this file is the design system guide (living copy). Identity/token changes are born in the vault and re-exported. |
 >
-> **Fonte única de verdade dos tokens** = `src/aora-theme.css` (não há HEX cru fora dele). Componentes consomem só CSS vars via utilitários do Tailwind v4.
+> **Single source of truth for tokens** = `src/aora-theme.css` (no raw HEX lives outside it). Components consume only CSS vars via Tailwind v4 utilities.
 
-## Como consumir (registry `@aoranow`)
+## How to consume (registry `@aoranow`)
 
 1. `components.json` → `"registries": { "@aoranow": "<host>/{name}.json" }`
-2. Tokens: `npx shadcn add @aoranow/theme` → copia `src/aora-theme.css`; no `index.css` do projeto: `@import "tailwindcss"; @import "tw-animate-css"; @import "./aora-theme.css";` (substitui os tokens neutros do shadcn).
-3. Kit completo: `npx shadcn add @aoranow/base` (theme + componentes). Ou item a item (`@aoranow/data-table`, etc.).
-4. Fontes (SIL OFL): `@fontsource/space-grotesk` (display), `@fontsource/inter` (corpo), `@fontsource/jetbrains-mono` (dados), `@fontsource/noto-sans-jp` (JP).
+2. Tokens: `npx shadcn add @aoranow/theme` → copies `src/aora-theme.css`; in the project's `index.css`: `@import "tailwindcss"; @import "tw-animate-css"; @import "./aora-theme.css";` (replaces shadcn's neutral tokens).
+3. Full kit: `npx shadcn add @aoranow/base` (theme + components). Or item by item (`@aoranow/data-table`, etc.).
+4. Fonts (SIL OFL): `@fontsource/space-grotesk` (display), `@fontsource/inter` (body), `@fontsource/jetbrains-mono` (data), `@fontsource/noto-sans-jp` (JP).
 
-## Identidade
+## Identity
 
-Marca AoraNow — **"GROW with TRUST"**: navy sóbrio + acento teal-verde de crescimento, gradiente assinatura (navy→teal→verde). Calmo, espaçoso, arredondado (pills, cards de raio generoso, bordas finas, botões ghost translúcidos). Direção estética **"AoraNow Blueprint"** (técnico/prancheta: mono como voz técnica, rótulos `// ASSIM`, dot-grid sutil, linework) — dose **alta** em vitrine/heros, **sóbria** em telas densas (dashboard/forms).
+AoraNow brand — **"GROW with TRUST"**: sober navy + a teal-green growth accent, signature gradient (navy→teal→green). Calm, spacious, rounded (pills, generous-radius cards, thin borders, translucent ghost buttons). Aesthetic direction **"AoraNow Blueprint"** (technical/drafting-table: mono as the technical voice, `// LIKE THIS` labels, subtle dot-grid, linework) — **high** dose in showcase/heros, **sober** in dense screens (dashboard/forms).
 
-## Cores (papéis)
+## Colors (roles)
 
-- **navy `#092F49`** (primary) — âncora, texto sobre branco (AAA), superfícies/botões sólidos. `navy-ink #23323C` = foreground.
-- **teal `#1C645F`** (accent de marca) — realce, link, hover, foco, gráfico. Passa AA como texto (6.91:1).
-- **teal-bright "Miku" `#39C5BB`** — **só no `.dark`** (primary/accent/ring) e gráficos. **Reprova como texto no claro.**
-- **claro = papel frio** `#EEF2F6` (não creme); `surface #FBFCFD`, `surface-alt #E4EAEF`.
-- **muted-foreground** = `#54697A` claro / `#9DB0BC` escuro (AA). **Texto = navy/foreground; teal/verde = só acento** (EARS 1.3).
-- **status**: sucesso=teal · warning âmbar `#92610A` · danger `#B42318` (claro). Paleta de chart própria no `.dark`.
+- **navy `#092F49`** (primary) — anchor, text on white (AAA), solid surfaces/buttons. `navy-ink #23323C` = foreground.
+- **teal `#1C645F`** (brand accent) — highlight, link, hover, focus, chart. Passes AA as text (6.91:1).
+- **teal-bright "Miku" `#39C5BB`** — **only in `.dark`** (primary/accent/ring) and charts. **Fails as text on light.**
+- **light = cool paper** `#EEF2F6` (not cream); `surface #FBFCFD`, `surface-alt #E4EAEF`.
+- **muted-foreground** = `#54697A` light / `#9DB0BC` dark (AA). **Text = navy/foreground; teal/green = accent only** (EARS 1.3).
+- **status**: success=teal · warning amber `#92610A` · danger `#B42318` (light). Dedicated chart palette in `.dark`.
 
-## Componentes (registry)
+## Components (registry)
 
-> **Doutrina de pastas:** `components/ui/` = shadcn **intocado** (regenerável, nunca editar) × `components/aora/` = **wrappers/composições nossas** (a dose Blueprint + defaults). Customizou shadcn → **embrulha em `aora/`**, não toca no `ui/`.
+> **Folder doctrine:** `components/ui/` = **untouched** shadcn (regenerable, never edit) × `components/aora/` = **our wrappers/compositions** (the Blueprint dose + defaults). Customized shadcn → **wrap it in `aora/`**, don't touch `ui/`.
 
-| item | o que é |
+| item | what it is |
 |---|---|
-| `@aoranow/theme` | tokens (claro + `.dark`), Tailwind v4 |
-| `@aoranow/status-badge` | status cor **+** ícone **+** rótulo (`aprovado`/`revisao`/`descartado`/`stale`) — nunca só-cor (EARS 1.8) |
-| `@aoranow/data-table` | tabela densa genérica `DataTable<T>` (TanStack): sort, filtro, seleção, paginação, sticky header, rola no próprio container |
-| `@aoranow/kpi-card` | tile de KPI (valor + delta) |
-| `@aoranow/empty-state` · `@aoranow/error-state` | estados (vazio + CTA / erro + retry) |
-| `@aoranow/app-shell` | shell de dashboard (sidebar + topbar), nav por props |
-| `@aoranow/base` | bundle: theme + todos acima |
+| `@aoranow/theme` | tokens (light + `.dark`), Tailwind v4 |
+| `@aoranow/status-badge` | status color **+** icon **+** label (`aprovado`/`revisao`/`descartado`/`stale`) — never color-only (EARS 1.8) |
+| `@aoranow/data-table` | generic dense table `DataTable<T>` (TanStack): sort, filter, selection, pagination, sticky header, scrolls within its own container |
+| `@aoranow/kpi-card` | KPI tile (value + delta) |
+| `@aoranow/empty-state` · `@aoranow/error-state` | states (empty + CTA / error + retry) |
+| `@aoranow/app-shell` | dashboard shell (sidebar + topbar), nav via props |
+| `@aoranow/base` | bundle: theme + all of the above |
 
-## Regras (Do / Don't)
+## Rules (Do / Don't)
 
-**Do** — só tokens; navy carrega texto, teal/verde só acento; status com cor+ícone+rótulo; foco visível em tudo; mono tabular em números; gradiente só com texto branco.
-**Don't** — teal-bright como texto no claro; verde/muted como corpo; HEX cru fora de `aora-theme.css`; remover outline de foco; botão sólido berrante onde cabe ghost.
+**Do** — tokens only; navy carries text, teal/green accent only; status with color+icon+label; visible focus on everything; tabular mono on numbers; gradient only with white text.
+**Don't** — teal-bright as text on light; green/muted as body; raw HEX outside `aora-theme.css`; remove focus outline; loud solid button where a ghost fits.
 
-## A11y (mínimo)
+## A11y (minimum)
 
-Contraste ≥4.5:1 (texto) / ≥3:1 (texto grande, foco, UI); tema claro **e** `.dark` ambos AA; sem scroll-x no body (tabelas rolam no próprio container); status nunca só-cor; foco navegável por teclado com anel ≥3:1.
+Contrast ≥4.5:1 (text) / ≥3:1 (large text, focus, UI); both light theme **and** `.dark` AA; no scroll-x on the body (tables scroll within their own container); status never color-only; keyboard-navigable focus with a ≥3:1 ring.
 
-## Raio (nota)
+## Radius (note)
 
-`--radius-lg` = raio de **componente** (`0.75rem`) — o shadcn usa `rounded-lg` em dropdown/popover/input/etc.; **não** shadowar com raio de hero. Heros usam `--radius-hero` (`3rem`). Botões = `rounded-pill`; cards = `rounded-card`.
+`--radius-lg` = **component** radius (`0.75rem`) — shadcn uses `rounded-lg` on dropdown/popover/input/etc.; **don't** shadow it with the hero radius. Heros use `--radius-hero` (`3rem`). Buttons = `rounded-pill`; cards = `rounded-card`.

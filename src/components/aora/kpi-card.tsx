@@ -2,7 +2,7 @@ import type { LucideIcon } from 'lucide-react'
 import { TrendingUp, TrendingDown } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 
-// Card compact (densidade do dashboard) — tile de KPI.
+// Compact card (dashboard density) — KPI tile.
 export function KpiCard({
   label,
   value,
@@ -13,7 +13,7 @@ export function KpiCard({
 }: {
   label: string
   value: string
-  delta?: number // % vs período anterior
+  delta?: number // % vs previous period
   hint?: string
   Icon: LucideIcon
   accent?: boolean
