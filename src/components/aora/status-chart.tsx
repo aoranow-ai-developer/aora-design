@@ -11,15 +11,15 @@ import { CONTEXTS, PROJECTS, countByStatus, type ContextStatus } from '@/lib/moc
 // so they switch with the theme. FIXED-size PieChart (no ResponsiveContainer:
 // it measured the wrong width on view switch and clipped the pie).
 const STATUS_TOKEN: Record<ContextStatus, { label: string; color: string }> = {
-  aprovado: { label: 'Approved', color: 'var(--success)' },
-  revisao: { label: 'In review', color: 'var(--warning)' },
-  descartado: { label: 'Discarded', color: 'var(--destructive)' },
+  approved: { label: 'Approved', color: 'var(--success)' },
+  review: { label: 'In review', color: 'var(--warning)' },
+  discarded: { label: 'Discarded', color: 'var(--destructive)' },
   stale: { label: 'Stale', color: 'var(--muted-foreground)' },
 }
 
 export function StatusDonut() {
   const counts = countByStatus(CONTEXTS)
-  const order: ContextStatus[] = ['aprovado', 'revisao', 'descartado', 'stale']
+  const order: ContextStatus[] = ['approved', 'review', 'discarded', 'stale']
   const data = order.map((s) => ({ status: s, label: STATUS_TOKEN[s].label, value: counts[s] ?? 0, fill: STATUS_TOKEN[s].color }))
 
   return (

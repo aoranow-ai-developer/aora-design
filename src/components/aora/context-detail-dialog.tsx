@@ -18,7 +18,7 @@ export function ContextDetailDialog({
 }: {
   ctx: ContextItem | null
   onOpenChange: (o: boolean) => void
-  onAction: (ctx: ContextItem, action: 'aprovar' | 'descartar') => void
+  onAction: (ctx: ContextItem, action: 'approve' | 'discard') => void
 }) {
   return (
     <Dialog open={!!ctx} onOpenChange={onOpenChange}>
@@ -53,10 +53,10 @@ export function ContextDetailDialog({
             </p>
 
             <DialogFooter>
-              <Button variant="outline" className="rounded-pill" onClick={() => onAction(ctx, 'descartar')}>
+              <Button variant="outline" className="rounded-pill" onClick={() => onAction(ctx, 'discard')}>
                 Discard
               </Button>
-              <Button className="rounded-pill hover:bg-accent" onClick={() => onAction(ctx, 'aprovar')}>
+              <Button className="rounded-pill hover:bg-accent" onClick={() => onAction(ctx, 'approve')}>
                 Approve context
               </Button>
             </DialogFooter>

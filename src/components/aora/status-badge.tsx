@@ -1,14 +1,14 @@
 import { CheckCircle2, Clock, XCircle, AlertTriangle, type LucideIcon } from 'lucide-react'
 
 // Design system status vocabulary (generic — not coupled to a domain).
-export type StatusVariant = 'aprovado' | 'revisao' | 'descartado' | 'stale'
+export type StatusVariant = 'approved' | 'review' | 'discarded' | 'stale'
 
 // badge-status (spec components.badge-status): ALWAYS color + icon + label
 // (EARS 1.8, status never color-only). data-status/role for the lint heuristic.
 const MAP: Record<StatusVariant, { label: string; Icon: LucideIcon; color: string; mix: string }> = {
-  aprovado: { label: 'Approved', Icon: CheckCircle2, color: 'text-success', mix: 'bg-[color-mix(in_srgb,var(--success)_14%,transparent)]' },
-  revisao: { label: 'In review', Icon: Clock, color: 'text-warning', mix: 'bg-[color-mix(in_srgb,var(--warning)_16%,transparent)]' },
-  descartado: { label: 'Discarded', Icon: XCircle, color: 'text-destructive', mix: 'bg-[color-mix(in_srgb,var(--destructive)_14%,transparent)]' },
+  approved: { label: 'Approved', Icon: CheckCircle2, color: 'text-success', mix: 'bg-[color-mix(in_srgb,var(--success)_14%,transparent)]' },
+  review: { label: 'In review', Icon: Clock, color: 'text-warning', mix: 'bg-[color-mix(in_srgb,var(--warning)_16%,transparent)]' },
+  discarded: { label: 'Discarded', Icon: XCircle, color: 'text-destructive', mix: 'bg-[color-mix(in_srgb,var(--destructive)_14%,transparent)]' },
   stale: { label: 'Stale', Icon: AlertTriangle, color: 'text-muted-foreground', mix: 'bg-surface-alt' },
 }
 

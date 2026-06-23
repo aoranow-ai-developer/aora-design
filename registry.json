@@ -16,7 +16,7 @@
       "name": "status-badge",
       "type": "registry:component",
       "title": "StatusBadge",
-      "description": "Status badge (color + icon + label; never color-only). Vocabulary aprovado/revisao/descartado/stale.",
+      "description": "Status badge (color + icon + label; never color-only). Vocabulary approved/review/discarded/stale.",
       "dependencies": ["lucide-react"],
       "files": [
         { "path": "src/components/aora/status-badge.tsx", "type": "registry:component", "target": "components/aora/status-badge.tsx" }

@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-export type ContextAction = 'aprovar' | 'revisao' | 'descartar' | 'stale'
+export type ContextAction = 'approve' | 'review' | 'discard' | 'stale'
 
 // Showcase usage: the showcase columns on top of the design system's generic DataTable.
 export function ContextsTable({
@@ -101,17 +101,17 @@ export function ContextsTable({
               <DropdownMenuContent align="end" className="w-44">
                 <DropdownMenuLabel>{ctx.id}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => onAction(ctx, 'aprovar')}>
+                <DropdownMenuItem onClick={() => onAction(ctx, 'approve')}>
                   <CheckCircle2 className="size-4 text-success" /> Approve
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => onAction(ctx, 'revisao')}>
+                <DropdownMenuItem onClick={() => onAction(ctx, 'review')}>
                   <Clock className="size-4 text-warning" /> Mark in review
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => onAction(ctx, 'stale')}>
                   <AlertTriangle className="size-4 text-muted-foreground" /> Mark stale
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem variant="destructive" onClick={() => onAction(ctx, 'descartar')}>
+                <DropdownMenuItem variant="destructive" onClick={() => onAction(ctx, 'discard')}>
                   <XCircle className="size-4" /> Discard
                 </DropdownMenuItem>
               </DropdownMenuContent>

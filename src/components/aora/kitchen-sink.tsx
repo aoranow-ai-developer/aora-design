@@ -114,7 +114,7 @@ export function KitchenSink() {
           <Badge variant="destructive">destructive</Badge>
           <Badge variant="outline">outline</Badge>
           <Separator orientation="vertical" className="h-5" />
-          <StatusBadge status="aprovado" />
+          <StatusBadge status="approved" />
           <StatusBadge status="stale" />
         </div>
       </Panel>

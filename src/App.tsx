@@ -32,9 +32,9 @@ const TITLES: Record<View, string> = {
 }
 
 const ACTION_LABEL: Record<ContextAction, string> = {
-  aprovar: 'approved',
-  revisao: 'moved to review',
-  descartar: 'discarded',
+  approve: 'approved',
+  review: 'moved to review',
+  discard: 'discarded',
   stale: 'marked stale',
 }
 
@@ -59,12 +59,12 @@ function App() {
 
   const counts = countByStatus(CONTEXTS)
   const total = CONTEXTS.length
-  const approvalRate = Math.round((counts.aprovado / total) * 100)
+  const approvalRate = Math.round((counts.approved / total) * 100)
 
   const onAction = (ctx: ContextItem, action: ContextAction) => {
     setDetail(null)
     const msg = `${ctx.id} ${ACTION_LABEL[action]}`
-    if (action === 'descartar') toast.error(msg, { description: ctx.title })
+    if (action === 'discard') toast.error(msg, { description: ctx.title })
     else toast.success(msg, { description: ctx.title })
   }
 
@@ -86,7 +86,7 @@ function App() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <KpiCard label="Contexts" value={String(total)} Icon={Database} delta={12} hint="vs. last week" accent />
             <KpiCard label="Approval rate" value={`${approvalRate}%`} Icon={Percent} delta={4} />
-            <KpiCard label="In review" value={String(counts.revisao)} Icon={Clock} hint="awaiting review" />
+            <KpiCard label="In review" value={String(counts.review)} Icon={Clock} hint="awaiting review" />
             <KpiCard label="Stale" value={String(counts.stale)} Icon={AlertTriangle} delta={-8} hint="need refresh" />
           </div>
           <div className="grid gap-5 lg:grid-cols-2">

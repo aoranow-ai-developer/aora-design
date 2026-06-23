@@ -37,7 +37,7 @@ AoraNow brand — **"GROW with TRUST"**: sober navy + a teal-green growth accent
 | item | what it is |
 |---|---|
 | `@aoranow/theme` | tokens (light + `.dark`), Tailwind v4 |
-| `@aoranow/status-badge` | status color **+** icon **+** label (`aprovado`/`revisao`/`descartado`/`stale`) — never color-only (EARS 1.8) |
+| `@aoranow/status-badge` | status color **+** icon **+** label (`approved`/`review`/`discarded`/`stale`) — never color-only (EARS 1.8) |
 | `@aoranow/data-table` | generic dense table `DataTable<T>` (TanStack): sort, filter, selection, pagination, sticky header, scrolls within its own container |
 | `@aoranow/kpi-card` | KPI tile (value + delta) |
 | `@aoranow/empty-state` · `@aoranow/error-state` | states (empty + CTA / error + retry) |
