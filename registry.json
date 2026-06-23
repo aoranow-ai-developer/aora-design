@@ -9,26 +9,97 @@
       "title": "AoraNow theme",
       "description": "Tokens do AoraNow (cores/raio/fontes, claro + .dark) — Tailwind v4. Consumir com @import \"./aora-theme.css\".",
       "files": [
-        {
-          "path": "src/aora-theme.css",
-          "type": "registry:file",
-          "target": "src/aora-theme.css"
-        }
+        { "path": "src/aora-theme.css", "type": "registry:file", "target": "src/aora-theme.css" }
+      ]
+    },
+    {
+      "name": "status-badge",
+      "type": "registry:component",
+      "title": "StatusBadge",
+      "description": "Badge de status (cor + ícone + rótulo; nunca só-cor). Vocabulário aprovado/revisao/descartado/stale.",
+      "dependencies": ["lucide-react"],
+      "files": [
+        { "path": "src/components/aora/status-badge.tsx", "type": "registry:component", "target": "components/aora/status-badge.tsx" }
       ]
     },
     {
       "name": "empty-state",
       "type": "registry:component",
       "title": "EmptyState",
-      "description": "Estado vazio do AoraNow (ícone + título + descrição + CTA).",
+      "description": "Estado vazio (ícone + título + descrição + CTA).",
       "dependencies": ["lucide-react"],
       "registryDependencies": ["button"],
       "files": [
-        {
-          "path": "src/components/aora/empty-state.tsx",
-          "type": "registry:component",
-          "target": "components/aora/empty-state.tsx"
-        }
+        { "path": "src/components/aora/empty-state.tsx", "type": "registry:component", "target": "components/aora/empty-state.tsx" }
+      ]
+    },
+    {
+      "name": "error-state",
+      "type": "registry:component",
+      "title": "ErrorState",
+      "description": "Estado de erro (ícone + mensagem + retry; role=alert).",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button"],
+      "files": [
+        { "path": "src/components/aora/error-state.tsx", "type": "registry:component", "target": "components/aora/error-state.tsx" }
+      ]
+    },
+    {
+      "name": "kpi-card",
+      "type": "registry:component",
+      "title": "KpiCard",
+      "description": "Tile de KPI (valor + delta + hint).",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["card"],
+      "files": [
+        { "path": "src/components/aora/kpi-card.tsx", "type": "registry:component", "target": "components/aora/kpi-card.tsx" }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:component",
+      "title": "DataTable",
+      "description": "Tabela densa genérica DataTable<T> (TanStack): sort, filtro, seleção, paginação, sticky header.",
+      "dependencies": ["@tanstack/react-table", "lucide-react"],
+      "registryDependencies": ["button", "input", "table"],
+      "files": [
+        { "path": "src/components/aora/data-table.tsx", "type": "registry:component", "target": "components/aora/data-table.tsx" }
+      ]
+    },
+    {
+      "name": "app-shell",
+      "type": "registry:component",
+      "title": "AppShell",
+      "description": "Shell de dashboard (sidebar + topbar), nav por props.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "avatar"],
+      "files": [
+        { "path": "src/components/aora/app-shell.tsx", "type": "registry:component", "target": "components/aora/app-shell.tsx" }
+      ]
+    },
+    {
+      "name": "base",
+      "type": "registry:block",
+      "title": "AoraNow base kit",
+      "description": "Bundle: theme + todos os componentes do design system AoraNow.",
+      "registryDependencies": [
+        "@aoranow/theme",
+        "@aoranow/status-badge",
+        "@aoranow/empty-state",
+        "@aoranow/error-state",
+        "@aoranow/kpi-card",
+        "@aoranow/data-table",
+        "@aoranow/app-shell"
+      ],
+      "files": []
+    },
+    {
+      "name": "design",
+      "type": "registry:file",
+      "title": "DESIGN.md",
+      "description": "Guia de design (design-system-em-texto) lido pelo agente antes de construir UI.",
+      "files": [
+        { "path": "DESIGN.md", "type": "registry:file", "target": "DESIGN.md" }
       ]
     }
   ]

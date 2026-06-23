@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "empty-state",
   "title": "EmptyState",
-  "description": "Estado vazio do AoraNow (ícone + título + descrição + CTA).",
+  "description": "Estado vazio (ícone + título + descrição + CTA).",
   "dependencies": [
     "lucide-react"
   ],

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
-import { Database, Clock, AlertTriangle, Percent, FilterX } from 'lucide-react'
+import { Database, Clock, AlertTriangle, Percent, FilterX, LayoutDashboard, Boxes } from 'lucide-react'
 import { Toaster } from '@/components/ui/sonner'
 import { Card } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
-import { AppShell, type View } from '@/components/aora/app-shell'
+import { AppShell, type ShellNavItem } from '@/components/aora/app-shell'
 import { KpiCard } from '@/components/aora/kpi-card'
 import { StatusDonut, ProjectBars } from '@/components/aora/status-chart'
 import { ContextsTable, type ContextAction } from '@/components/aora/contexts-table'
@@ -14,6 +14,22 @@ import { KitchenSink } from '@/components/aora/kitchen-sink'
 import { EmptyState } from '@/components/aora/empty-state'
 import { ErrorState } from '@/components/aora/error-state'
 import { CONTEXTS, countByStatus, type AgpContext } from '@/lib/mock'
+
+type View = 'overview' | 'contexts' | 'states' | 'kitchen'
+
+const NAV: ShellNavItem[] = [
+  { id: 'overview', label: 'Visão geral', Icon: LayoutDashboard },
+  { id: 'contexts', label: 'Contextos', Icon: Database },
+  { id: 'states', label: 'Estados', Icon: AlertTriangle },
+  { id: 'kitchen', label: 'Componentes', Icon: Boxes },
+]
+
+const TITLES: Record<View, string> = {
+  overview: 'Visão geral',
+  contexts: 'Contextos',
+  states: 'Estados de dados',
+  kitchen: 'Componentes (kitchen sink)',
+}
 
 const ACTION_LABEL: Record<ContextAction, string> = {
   aprovar: 'aprovado',
@@ -53,7 +69,18 @@ function App() {
   }
 
   return (
-    <AppShell view={view} setView={setView} dark={dark} setDark={setDark} onOpenCommand={() => setCmdOpen(true)}>
+    <AppShell
+      brand="AoraNow"
+      nav={NAV}
+      activeId={view}
+      onNavigate={(id) => setView(id as View)}
+      title={TITLES[view]}
+      userInitials="LS"
+      footer="// AGP Console · mock"
+      dark={dark}
+      setDark={setDark}
+      onOpenCommand={() => setCmdOpen(true)}
+    >
       {view === 'overview' && (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

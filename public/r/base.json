@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "base",
+  "title": "AoraNow base kit",
+  "description": "Bundle: theme + todos os componentes do design system AoraNow.",
+  "registryDependencies": [
+    "@aoranow/theme",
+    "@aoranow/status-badge",
+    "@aoranow/empty-state",
+    "@aoranow/error-state",
+    "@aoranow/kpi-card",
+    "@aoranow/data-table",
+    "@aoranow/app-shell"
+  ],
+  "files": [],
+  "type": "registry:block"
+}

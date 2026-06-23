@@ -1,16 +1,18 @@
 import { CheckCircle2, Clock, XCircle, AlertTriangle, type LucideIcon } from 'lucide-react'
-import type { ContextStatus } from '@/lib/mock'
 
-// badge-status do AGP (spec components.badge-status): SEMPRE cor + ícone + rótulo
+// Vocabulário de status do design system (genérico — sem acoplar a domínio).
+export type StatusVariant = 'aprovado' | 'revisao' | 'descartado' | 'stale'
+
+// badge-status (spec components.badge-status): SEMPRE cor + ícone + rótulo
 // (EARS 1.8, status nunca só-cor). data-status/role p/ a heurística de lint.
-const MAP: Record<ContextStatus, { label: string; Icon: LucideIcon; color: string; mix: string }> = {
+const MAP: Record<StatusVariant, { label: string; Icon: LucideIcon; color: string; mix: string }> = {
   aprovado: { label: 'Aprovado', Icon: CheckCircle2, color: 'text-success', mix: 'bg-[color-mix(in_srgb,var(--success)_14%,transparent)]' },
   revisao: { label: 'Em revisão', Icon: Clock, color: 'text-warning', mix: 'bg-[color-mix(in_srgb,var(--warning)_16%,transparent)]' },
   descartado: { label: 'Descartado', Icon: XCircle, color: 'text-destructive', mix: 'bg-[color-mix(in_srgb,var(--destructive)_14%,transparent)]' },
   stale: { label: 'Stale', Icon: AlertTriangle, color: 'text-muted-foreground', mix: 'bg-surface-alt' },
 }
 
-export function StatusBadge({ status }: { status: ContextStatus }) {
+export function StatusBadge({ status }: { status: StatusVariant }) {
   const v = MAP[status]
   return (
     <span
