@@ -25,14 +25,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      # gera os itens em ./_site/r → servidos em /r/{name}.json
-      - run: npx --yes shadcn@latest build --output ./_site/r
+          cache: npm
+      - run: npm ci
+      # 1) showcase (Vite) → dist/  ·  2) registry → dist/r/ (servido em /r/{name}.json)
+      - run: npm run build
+        env:
+          VITE_BASE: /aora-design/
+      - run: npx --yes shadcn@latest build --output ./dist/r
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true # liga o Pages (source = Actions) na 1ª run
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./_site
+          path: ./dist
 
   deploy:
     needs: build
